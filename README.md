@@ -1,3 +1,10 @@
+#Start Project(By Gabriel Stanca #Gabelll)
+
+Try using the ---> npm install <---, if the mongoose, express and body-parser doesn't exist in package.json try installing
+them using ---> npm install --save express body-parser <---
+else try to install them one by one.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
