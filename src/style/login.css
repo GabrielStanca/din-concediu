@@ -1,0 +1,83 @@
+.login_container {
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    flex: 1 1 auto;
+    align-items: center;
+    background-image: linear-gradient( #fab2ff, #1904e5);
+}
+.login_container form {
+    background: rgba(0,0,0,.5);
+    color: white;
+    border-radius: 30px;
+    width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    padding: 20px 0;
+}
+.login_container h1 {
+    margin: 0 0 30px ;
+    padding-bottom: 10px;
+    width: 80%;
+    text-align: center;
+    border-bottom: 3px black;
+    border-bottom-style: outset;
+}
+.login_input {
+    width: 80%;
+    border: 1px solid black ;
+    border-radius: 5px ;
+    display: flex;
+    height: 40px;
+    margin-bottom: 20px;
+    align-items: center;
+    background: rgba(0,0,0,.5);
+}
+.login_input label {
+    color: white;
+    display: flex;
+    justify-content: center;
+    background: transparent;
+    width: 30px;
+}
+.login_input input {
+    color: white;
+    background: transparent;
+    border: 0;
+    outline: 0;
+    height: 100%;
+    width: 100%;
+}
+.login_input input::-ms-reveal {
+    filter: invert(100%);
+}
+
+.login_forgot-password {
+    width: 80%;
+    text-align: right;
+   align-items:end;
+    margin-bottom: 20px;
+}
+.login_forgot-password a {
+    color: white;
+    text-decoration: unset;
+}
+.login_login-button {
+    width: 70%;
+    height: 30px;
+    background: mediumpurple;
+    color: white;
+    border-radius: 5px;
+    border: unset;
+    transition: all .5s;
+}
+.login_login-button:hover {
+    width: 75%;
+    height: 35px;
+    background: greenyellow;
+    color: black;
+    border-radius: 10px;
+}
+
