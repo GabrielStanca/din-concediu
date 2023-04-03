@@ -13,14 +13,18 @@ const Register = () => {
         phone: "", // String because we use +40... format
         password: ""
     });
-
+    const [error,setError] = useState(false)
     return (
         <div className="register_container">
             <form onSubmit={async (e) => {
                 e.preventDefault()
                 try {
                     const data = await registerUserService(registerUser);
-                    console.log(data);
+                    console.log(data)
+                    if(data)
+                        window.location.href = "/login"
+                    else
+                        setError(true)
                 } catch (error) {
                     console.error(error);
                 }
