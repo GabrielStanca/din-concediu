@@ -4,8 +4,14 @@ import PeopleCardList from "./reusableComponents/peopleCardList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 import {useGlobalContext} from "../context/GlobalContext";
+import {getAllUsers} from "../services/getAllUsers";
+
 
 const Chat= ()=> {
+
+    getAllUsers().then(users => console.log(users))
+
+
     const userList = [{
         firstName: "Marinica",
         lastName: "Gigel",
