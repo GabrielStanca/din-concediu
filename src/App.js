@@ -7,7 +7,7 @@ import About from "./components/about";
 import Register from "./components/register";
 import ForgotPassword from "./components/forgot-password";
 import {GlobalProvider} from "./context/GlobalContext";
-import logo from "./logo.svg";
+import TB_transparent from "../src/images/TB_transparent.svg"
 import Chat from "./components/chat";
 
 function App() {
@@ -17,9 +17,7 @@ function App() {
                 <Router>
                     <nav>
                         <div className="navigation_logo">
-                        <header className="App-header">
-                            <img src={logo} className="App-logo" alt="logo" />
-                        </header>
+                            <img src={TB_transparent} alt="logo" />
                     </div>
                     <div className="navigation_links">
                         <Link to="/"><span>Home</span></Link>

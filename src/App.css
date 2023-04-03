@@ -8,10 +8,10 @@
   flex: 0 1 auto;
   justify-content: space-between;
   padding: 20px 30px;
-  background: #282c34;
+  background: antiquewhite;
 }
 .App nav a {
-  color: white;
+  color: black;
   text-decoration: unset;
 }
 .App nav a:not(:last-child) {

@@ -3,6 +3,8 @@ import "../style/chat.css"
 import PeopleCardList from "./reusableComponents/peopleCardList";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
+import {useGlobalContext} from "../context/GlobalContext";
+
 const Chat= ()=> {
     const userList = [{
         firstName: "Marinica",
@@ -47,7 +49,8 @@ const Chat= ()=> {
         },]
 
     const [filter, setFilter] = useState("");
-
+    const {user} = useGlobalContext()
+    console.log(user,"aaaa")
     return (
         <div className="chat_container">
             <div className="chat_list">
