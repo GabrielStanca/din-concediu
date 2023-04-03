@@ -6,7 +6,7 @@
 .App nav {
   display: flex;
   flex: 0 1 auto;
-  justify-content: end;
+  justify-content: space-between;
   padding: 20px 30px;
   background: #282c34;
 }

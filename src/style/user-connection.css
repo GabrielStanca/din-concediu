@@ -51,7 +51,7 @@
     height: 100%;
     width: 100%;
 }
-.login_input input::-ms-reveal .forgot-password_input in::-ms-reveal, .register_input input::-ms-reveal {
+.login_input input::-ms-reveal, .forgot-password_input in::-ms-reveal, .register_input input::-ms-reveal {
     filter: invert(100%);
 }
 
