@@ -6,28 +6,31 @@ import Home from "./components/home";
 import About from "./components/about";
 import Register from "./components/register";
 import ForgotPassword from "./components/forgot-password";
+import {GlobalProvider} from "./context/GlobalContext";
 
 function App() {
-  return (
-    <div className="App">
-        <Router>
-                <nav>
-                    <Link to="/"><span>Home</span></Link>
-                    <Link to="/about"><span>About</span></Link>
-                    <Link to="/login"><span>Login</span></Link>
-                    <Link to="/register"><span>Register</span></Link>
-                </nav>
-                <Routes>
-                    <Route path="" exact element={<Home />}/>
-                    <Route path="/login" exact element={<Login />} />
-                    <Route path="/about" exact element={<About />} />
-                    <Route path="/register" exact element={<Register />}/>
-                    <Route path="/forgot-password" exact element={<ForgotPassword />}/>
-                </Routes>
-        </Router>
+    return (
+        <GlobalProvider>
+            <div className="App">
+                <Router>
+                    <nav>
+                        <Link to="/"><span>Home</span></Link>
+                        <Link to="/about"><span>About</span></Link>
+                        <Link to="/login"><span>Login</span></Link>
+                        <Link to="/register"><span>Register</span></Link>
+                    </nav>
+                    <Routes>
+                        <Route path="" exact element={<Home/>}/>
+                        <Route path="/login" exact element={<Login/>}/>
+                        <Route path="/about" exact element={<About/>}/>
+                        <Route path="/register" exact element={<Register/>}/>
+                        <Route path="/forgot-password" exact element={<ForgotPassword/>}/>
+                    </Routes>
+                </Router>
 
-    </div>
-  );
+            </div>
+        </GlobalProvider>
+    );
 }
 
 export default App;

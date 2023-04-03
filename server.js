@@ -2,6 +2,7 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser")
+const cors = require('cors');
 
 // Import Routes
 const authRoute = require("./routes/auth")
@@ -11,18 +12,10 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded());
 app.use(cookieParser());
-
-app.get("/api", (req, res) => {
-    res.send("It works");
-});
-
-app.post("/name", (req, res) => {
-    if (req.body.name) {
-        return res.json({ name: req.body.name });
-    } else {
-        return res.status(400).json({ error: "No name provided" });
-    }
-})
+app.use(cors({
+    origin: "http://localhost:5002",
+    credentials: true
+}));
 
 app.use("/api/auth", authRoute);
 
