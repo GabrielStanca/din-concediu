@@ -23,7 +23,7 @@ router.get("/test", (req, res) => {
 router.post("/register", async (req, res) => {
     try {
 
-        const { errors, isValid } = validateRegisterInput(req.body);
+        const {errors, isValid} = validateRegisterInput(req.body);
         if (!isValid) {
             return res.status(400).json(errors)
         }
@@ -36,7 +36,7 @@ router.post("/register", async (req, res) => {
         if (existingEmail) {
             return res
                 .status(400)
-                .json({ error: "There is already a user with this email" });
+                .json({error: "There is already a user with this email"});
         }
 
         // Hash pass
@@ -55,13 +55,12 @@ router.post("/register", async (req, res) => {
         const savedUser = await newUser.save();
 
         // Deleting the password from the object that is returned to the user
-        const userToReturn = { ...savedUser._doc };
+        const userToReturn = {...savedUser._doc};
         delete userToReturn.password;
 
         // Return the new user
         return res.json(userToReturn);
-    }
-    catch (err) {
+    } catch (err) {
         console.log(err);
         res.status(500).send(err.message);
     }
@@ -80,9 +79,7 @@ router.post("/login", async (req, res) => {
         });
 
         if (!user) {
-            return res.
-                status(400).
-                json({ error: "There was a problem with your login credentials" });
+            return res.status(400).json({error: "There was a problem with your login credentials"});
         }
 
         const passwordMatch = await bcrypt.compare(
@@ -91,12 +88,10 @@ router.post("/login", async (req, res) => {
         );
 
         if (!passwordMatch) {
-            return res.
-                status(400).
-                json({ error: "There was a problem with your login credentials" });
+            return res.status(400).json({error: "There was a problem with your login credentials"});
         }
 
-        const payload = { userId: user._id };
+        const payload = {userId: user._id};
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, {
             expiresIn: "7d"
@@ -108,7 +103,7 @@ router.post("/login", async (req, res) => {
             secure: process.env.NODE_ENV === "production"
         });
 
-        const userToReturn = { ...user._doc };
+        const userToReturn = {...user._doc};
         delete userToReturn.password;
 
         return res.json({
@@ -128,12 +123,38 @@ router.post("/login", async (req, res) => {
 // @access      Private
 
 router.get("/current", requiresAuth, (req, res) => {
-    if(!req.user) {
+    if (!req.user) {
         return res.status(401).send("Unauthorized");
     }
 
     return res.json(req.user);
-    
+
+})
+
+
+// @route       PATCH /api/auth/current
+// @desc        Edit the logged-in user
+// @access      Private
+
+router.patch("/current", requiresAuth, async (req, res) => {
+    try {
+        if (!req.user) {
+            return res.status(401).send("Unauthorized");
+        }
+        
+        const userId = jwt.decode(req.cookies["access-token"]).userId
+        const update = req.body;
+        const updatedUser = await User.findByIdAndUpdate(userId, update, {
+            new: true, // return the updated document instead of the original
+            runValidators: true, // validate the update against the model's schema
+        });
+
+        res.json(updatedUser);
+
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
 })
 
 module.exports = router;
