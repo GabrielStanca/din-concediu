@@ -2,27 +2,54 @@ import React from "react";
 import '../style/user-connection.css'
 import '../App.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { faEnvelope,faLock } from '@fortawesome/free-solid-svg-icons'
+import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
+import {useState} from "react";
+import {registerUserService} from "../services/register.service";
+import {loginUserService} from "../services/login.service";
 
-const Login= ()=> {
+const Login = () => {
+
+    const [loginCredentials, setLoginCredentials] = useState({
+        email: "",
+        password: "",
+    });
+
     return (
         <div className="login_container">
-            <form>
+            <form onSubmit={async (e) => {
+                e.preventDefault()
+                try {
+                    const data = await loginUserService(loginCredentials);
+                } catch (error) {
+                    console.error(error);
+                }
+            }}
+            >
                 <h1>Login</h1>
                 <div className="login_input">
-                    <label htmlFor="email"> <FontAwesomeIcon icon={faEnvelope} /></label>
-                    <input name="email"  id="email" type="email" required title placeholder="Type your email" onChange={(e)=>{
-                        console.log(e.target.value)
-                    }}/>
+                    <label htmlFor="email"> <FontAwesomeIcon icon={faEnvelope}/></label>
+                    <input name="email" id="email" type="email" required title placeholder="Type your email"
+                           onChange={(e) => {
+                               setLoginCredentials({...loginCredentials, email: e.target.value})
+                           }}
+                    />
                 </div>
                 <div className="login_input">
-                    <label htmlFor="password"> <FontAwesomeIcon icon={faLock} /></label>
-                    <input name="password" required id="password" type="password" placeholder="Type you password" onChange={(e)=>{
-                        console.log(e.target.value)
-                    }}/>
+                    <label htmlFor="password"> <FontAwesomeIcon icon={faLock}/></label>
+                    <input name="password" required id="password" type="password" placeholder="Type you password"
+                           onChange={(e) => {
+                               setLoginCredentials({...loginCredentials, password: e.target.value})
+                           }}
+                    />
                 </div>
                 <span className="login_forgot-password"><a href="/forgot-password">Forgot password</a></span>
-                <button className="login_login-button" type={"submit"} onChange={event => console.log(event)}>Login</button>
+                <button className="login_login-button" type={"submit"}
+                        onChange={(event) => {
+                            event.preventDefault();
+                        }}
+                >
+                    Login
+                </button>
             </form>
 
 

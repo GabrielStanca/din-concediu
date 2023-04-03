@@ -5,10 +5,16 @@ const validateRegisterInput = (data) => {
     let errors = {};
 
     //check name field  
-    if (isEmpty(data.name)) {
-        errors.name = "Name field cannot be empty";
-    } else if (!Validator.isLength(data.name, { min: 2, max: 30 })) {
-        errors.name = "Name must be between 2 and 30 characters long";
+    if (isEmpty(data.firstName)) {
+        errors.firstName = "First Name field cannot be empty";
+    } else if (!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
+        errors.firstName = "First Name must be between 2 and 30 characters long";
+    }
+
+    if (isEmpty(data.lastName)) {
+        errors.lastName = "Last Name field cannot be empty";
+    } else if (!Validator.isLength(data.lastName, { min: 2, max: 30 })) {
+        errors.lastName = "Last Name must be between 2 and 30 characters long";
     }
 
     // check email field
@@ -22,15 +28,15 @@ const validateRegisterInput = (data) => {
     if (isEmpty(data.password)) {
         errors.password = "Password field cannot be empty";
     } else if (!Validator.isLength(data.password, { min: 8, max: 150 })) {
-        errors.password = "Password must be between 6 and 150 characters long";
+        errors.password = "Password must be between 8 and 150 characters long";
     }
 
-    //check confirm password field  
-    if (isEmpty(data.confirmPassword)) {
-        errors.confirmPassword = "Confirm Password field cannot be empty";
-    } else if (!Validator.equals(data.password, data.confirmPassword)) {
-        errors.confirmPassword = "Password and Confirm password must match";
-    }
+    // //check confirm password field
+    // if (isEmpty(data.confirmPassword)) {
+    //     errors.confirmPassword = "Confirm Password field cannot be empty";
+    // } else if (!Validator.equals(data.password, data.confirmPassword)) {
+    //     errors.confirmPassword = "Password and Confirm password must match";
+    // }
 
     return {
         errors,

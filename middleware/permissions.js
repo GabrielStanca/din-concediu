@@ -3,6 +3,7 @@ const jwt = require("jsonwebtoken");
 
 const requiresAuth = async (req, res, next) => {
     const token = req.cookies["access-token"];
+
     let isAuthed = false;
 
     if (token) {
