@@ -1,12 +1,26 @@
-import React from "react";
+import React, {useState} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../style/user-connection.css"
 import {faEnvelope, faLock, faUserTie, faPhone} from "@fortawesome/free-solid-svg-icons";
 
+
+
+
 const Register= ()=> {
+
+    const [registerUser, setRegisterUser] = useState({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: 0,
+        password: ""
+    })
+
     return (
         <div className="register_container">
-            <form>
+            <form onSubmit={(e)=>{
+                e.preventDefault()
+                console.log(registerUser)}}>
                 <h1>Register</h1>
                 <div className="register_input">
                     <label htmlFor="firstName"> <FontAwesomeIcon icon={faUserTie} /></label>
@@ -16,15 +30,27 @@ const Register= ()=> {
                 </div>
                 <div className="register_input">
                     <label htmlFor="lastName"> <FontAwesomeIcon icon={faUserTie} /></label>
-                    <input name="lastName"  id="lastName" type="text" required title placeholder="Type your Last Name" onChange={(e)=>{
+                    <input
+                        name="lastName"
+                        id="lastName"
+                        type="text"
+                        required
+                        title
+                        placeholder="Type your Last Name"
+                        onChange={(e)=>{
+                            setRegisterUser({...registerUser, firstName: e.target.value })
                         console.log(e.target.value)
-                    }}/>
+                    }}
+                    />
                 </div>
                 <div className="register_input">
                     <label htmlFor="phoneNumber"> <FontAwesomeIcon icon={faPhone} /></label>
-                    <input name="phoneNumber"  id="phoneNumber" type="tel" pattern="[+]{1}[0-9]{11,14}" required title placeholder="Type your Phone Number" onChange={(e)=>{
-                        console.log(e.target.value)
-                    }}/>
+                    <input name="phoneNumber"  id="phoneNumber" type="tel" pattern="[+]{1}[0-9]{11,14}" required title placeholder="Type your Phone Number"
+                           onChange={(e)=>{
+                               setRegisterUser({...registerUser, lastName: e.target.value })
+                               console.log(e.target.value)
+                           }}
+                    />
                 </div>
                 <div className="register_input">
                     <label htmlFor="email"> <FontAwesomeIcon icon={faEnvelope} /></label>
@@ -45,7 +71,10 @@ const Register= ()=> {
                     }}/>
                 </div>
 
-                <button className="register_save-button" type={"submit"} onChange={event => console.log(event)}>Save</button>
+                <button className="register_save-button" type={"submit"} onChange={(event) =>{
+                    event.preventDefault();
+                    console.log(event)
+                } }>Save</button>
             </form>
         </div>
     );
