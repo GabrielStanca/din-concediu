@@ -8,9 +8,53 @@ html,body {
   height: 100%;
   padding: 0;
   box-sizing: border-box;
+  overflow: hidden;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+::-webkit-scrollbar {
+  width: 5px;
+}
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: grey;
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: darkgrey;
+}
+
+.searchInput {
+  width: 100%;
+  border: 1px solid black ;
+  border-radius: 5px ;
+  display: flex;
+  height: 40px;
+  margin-bottom: 20px;
+  align-items: center;
+  background: rgba(0,0,0,.5);
+}
+.searchInput label {
+  color: white;
+  display: flex;
+  justify-content: center;
+  background: transparent;
+  width: 30px;
+}
+.searchInput input {
+  color: white;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  height: 100%;
+  width: 100%;
+}
+.searchInput input::-ms-reveal {
+  filter: invert(100%);
 }

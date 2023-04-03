@@ -1,10 +1,8 @@
-import React from "react";
+import React, {useState} from "react";
 import '../style/user-connection.css'
 import '../App.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
-import {useState} from "react";
-import {registerUserService} from "../services/register.service";
 import {loginUserService} from "../services/login.service";
 
 const Login = () => {
@@ -20,6 +18,11 @@ const Login = () => {
                 e.preventDefault()
                 try {
                     const data = await loginUserService(loginCredentials);
+                    if(data) {
+                        document.location.href= "/chat"
+                    }
+                    else
+                        alert("esti prost")
                 } catch (error) {
                     console.error(error);
                 }
@@ -43,13 +46,7 @@ const Login = () => {
                     />
                 </div>
                 <span className="login_forgot-password"><a href="/forgot-password">Forgot password</a></span>
-                <button className="login_login-button" type={"submit"}
-                        onChange={(event) => {
-                            event.preventDefault();
-                        }}
-                >
-                    Login
-                </button>
+                <button className="login_login-button" type={"submit"}>Login</button>
             </form>
 
 
