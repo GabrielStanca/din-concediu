@@ -53,6 +53,20 @@ export const GlobalProvider = (props) => {
         }
     }
 
+    const getAllUsers = async () => {
+        try {
+            const res = await axios.get("http://localhost:5001/api/auth/current", { withCredentials: true });
+
+            if (res.data) {
+                dispatch({type: "SET_USER", payload: res.data});
+            } else {
+                dispatch({type: "RESET_USER"})
+            }
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const value = {
         ...state,
         getCurrentUser,

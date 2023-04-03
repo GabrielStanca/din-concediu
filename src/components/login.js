@@ -18,9 +18,8 @@ const Login = () => {
                 e.preventDefault()
                 try {
                     const data = await loginUserService(loginCredentials);
-
                     if(data) {
-                        document.location.href= "/chat"
+                        document.location.href= `/chat?id=${data.user._id}`
                     }
                     else
                         alert("esti prost")

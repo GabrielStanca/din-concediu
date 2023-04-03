@@ -5,6 +5,7 @@
     justify-content: center;
     height: 100%;
     background-image: linear-gradient( #fab2ff, #1904e5);
+    position: relative;
 }
 .navigation_logo img {
     max-height: 40px;
@@ -12,4 +13,12 @@
 .navigation_links {
     display: flex;
     align-items: center;
+}
+.background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
