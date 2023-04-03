@@ -6,6 +6,7 @@ import Home from "./components/home";
 import About from "./components/about";
 import Register from "./components/register";
 import ForgotPassword from "./components/forgot-password";
+import Profile from "./components/profile";
 import {GlobalProvider} from "./context/GlobalContext";
 import TB_transparent from "../src/images/TB_transparent.svg"
 import Chat from "./components/chat";
@@ -24,6 +25,7 @@ function App() {
                         <Link to="/about"><span>About</span></Link>
                         <Link to="/login"><span>Login</span></Link>
                         <Link to="/register"><span>Register</span></Link>
+                        <Link to="/profile"><span>Profile</span></Link>
                     </div>
 
                 </nav>
@@ -33,6 +35,7 @@ function App() {
                         <Route path="/about" exact element={<About/>}/>
                         <Route path="/register" exact element={<Register/>}/>
                         <Route path="/forgot-password" exact element={<ForgotPassword/>}/>
+                        <Route path="/profile" exact element={<Profile/>}/>
                     <Route path="/chat" exact element={<Chat />}/>
                     </Routes>
                 </Router>

@@ -21,7 +21,19 @@ const UserSchema = new Schema(
         phone: {
             type: String,
             required: true,
-        }
+        },
+        gender : {
+            type: String,
+            required: false,
+        },
+        birthDate: {
+            type: String,
+            required: false,
+        },
+        description: {
+            type: String,
+            required: false,
+        },
     },
     {
         timestamps: true
