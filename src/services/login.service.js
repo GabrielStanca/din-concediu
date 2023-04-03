@@ -4,13 +4,14 @@ export const loginUserService = async (user) => {
     try {
         let userToSend = {...user};
 
-        const response = await axios.post("http://localhost:5001/api/auth/login", userToSend, {
-            header: {
-                'Content-Type': 'application/json'
-            }
+        const response = await axios.post("http://localhost:5001/api/auth/login", user, {
+            headers: {
+                "Content-Type": "application/json"
+            },
+            withCredentials: true // add this to send cookies with the request
         });
-
-        document.cookie = `access-token=${response.data.token}; expires=${new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)}; httpOnly=true`;
+        const expires = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+        document.cookie = `access-token=${response.data.token}; expires=${expires.toUTCString()}; path=/; HttpOnly`;
 
 
         return response.data;

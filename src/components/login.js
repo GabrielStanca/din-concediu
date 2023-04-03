@@ -18,11 +18,13 @@ const Login = () => {
                 e.preventDefault()
                 try {
                     const data = await loginUserService(loginCredentials);
+
                     if(data) {
                         document.location.href= "/chat"
                     }
                     else
                         alert("esti prost")
+
                 } catch (error) {
                     console.error(error);
                 }
