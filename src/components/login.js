@@ -1,5 +1,5 @@
 import React from "react";
-import '../style/login.css'
+import '../style/user-connection.css'
 import '../App.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEnvelope,faLock } from '@fortawesome/free-solid-svg-icons'
@@ -21,8 +21,7 @@ const Login= ()=> {
                         console.log(e.target.value)
                     }}/>
                 </div>
-                <span className="login_forgot-password"><a href="#">Forgot password</a></span>
-
+                <span className="login_forgot-password"><a href="/forgot-password">Forgot password</a></span>
                 <button className="login_login-button" type={"submit"} onChange={event => console.log(event)}>Login</button>
             </form>
 

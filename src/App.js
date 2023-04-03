@@ -5,6 +5,7 @@ import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
 import Home from "./components/home";
 import About from "./components/about";
 import Register from "./components/register";
+import ForgotPassword from "./components/forgot-password";
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
                     <Route path="/login" exact element={<Login />} />
                     <Route path="/about" exact element={<About />} />
                     <Route path="/register" exact element={<Register />}/>
-
+                    <Route path="/forgot-password" exact element={<ForgotPassword />}/>
                 </Routes>
         </Router>
 
