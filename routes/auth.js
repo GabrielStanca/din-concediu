@@ -34,13 +34,11 @@ router.post("/register", async (req, res) => {
         });
 
         if (existingEmail) {
+            errors.email = "There is already a user with this email"
             return res
                 .status(400)
-                .json({error: "There is already a user with this email"});
+                .json(errors);
         }
-
-        // Hash pass
-        //const hashedPassword = await bcrypt.hash(req.body.password, 12);
 
         // Create new user
         const newUser = new User({
@@ -61,7 +59,6 @@ router.post("/register", async (req, res) => {
         // Return the new user
         return res.json(userToReturn);
     } catch (err) {
-        console.log(err);
         res.status(500).send(err.message);
     }
 });
@@ -79,7 +76,7 @@ router.post("/login", async (req, res) => {
         });
 
         if (!user) {
-            return res.status(400).json({error: "There was a problem with your login credentials"});
+            return res.status(400).json({error: "There was a problem with your login credentials."});
         }
 
         const passwordMatch = await bcrypt.compare(
@@ -88,7 +85,7 @@ router.post("/login", async (req, res) => {
         );
 
         if (!passwordMatch) {
-            return res.status(400).json({error: "There was a problem with your login credentials"});
+            return res.status(400).json({error: "There was a problem with your login credentials."});
         }
 
         const payload = {userId: user._id};
@@ -112,7 +109,6 @@ router.post("/login", async (req, res) => {
         })
 
     } catch (err) {
-        console.log(err);
         return res.status(500).send(err.message);
     }
 });
@@ -157,7 +153,6 @@ router.patch("/current", requiresAuth, async (req, res) => {
         res.json(updatedUser);
 
     } catch (err) {
-        console.error(err.message);
         res.status(500).send("Server Error");
     }
 })
@@ -177,8 +172,8 @@ router.delete("/current", requiresAuth, async (req, res) => {
 
         res.clearCookie("access-token"); // clear the access-token cookie
         res.send("User deleted successfully");
+
     } catch (err) {
-        console.error(err.message);
         res.status(500).send("Server Error");
     }
 })
