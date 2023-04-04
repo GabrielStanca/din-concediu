@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './App.css';
 import Login from "./components/login";
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
@@ -7,28 +7,62 @@ import About from "./components/about";
 import Register from "./components/register";
 import ForgotPassword from "./components/forgot-password";
 import Profile from "./components/profile";
-import {GlobalProvider} from "./context/GlobalContext";
+import {GlobalProvider, useGlobalContext} from "./context/GlobalContext";
 import TB_transparent from "../src/images/TB_transparent.svg"
 import Chat from "./components/chat";
+import {faBars, faLock,faCircleDot} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 function App() {
+    const [showNavigationMobile, setShowNavigationMobile] = useState(false)
+    const {user} = useGlobalContext()
+
     return (
         <GlobalProvider>
             <div className="App">
                 <Router>
                     <nav>
-                        <div className="navigation_logo">
+                    <div className="navigation_logo">
                             <img src={TB_transparent} alt="logo" />
                     </div>
+                    <button className="navigation_links_mobile"
+                    onClick={()=>{
+                        if(showNavigationMobile)
+                            setShowNavigationMobile(false)
+                        else setShowNavigationMobile(true)
+                    }}>
+                        <FontAwesomeIcon icon={faBars}/>
+                    </button>
                     <div className="navigation_links">
                         <Link to="/"><span>Home</span></Link>
-                        <Link to="/about"><span>About</span></Link>
-                        <Link to="/login"><span>Login</span></Link>
-                        <Link to="/register"><span>Register</span></Link>
-                        <Link to="/profile"><span>Profile</span></Link>
+                        {!user ?(
+                            <>
+                                <Link to="/login"><span>Login</span></Link>
+                                <Link to="/register"><span>Register</span></Link>
+                            </>
+                        ):(
+                          <>
+                              <Link to="/chat"><span>Chat</span></Link>
+                            <Link to="/profile"><span>Profile</span></Link>
+                              <button>Dissconect</button>
+                          </>
+                        )}
                     </div>
 
                 </nav>
+                    <div className={`navigation_container_mobile ${showNavigationMobile ? "active_menu" : ""}`}>
+                        <Link to="/"><span>Home</span></Link>
+                        {!user?(
+                            <>
+                                <Link to="/login"><span>Login</span></Link>
+                                <Link to="/register"><span>Register</span></Link>
+                            </>
+                        ):(
+                            <Link to="/profile"><span>Profile</span></Link>
+                        )}
+
+
+                    </div>
                     <Routes>
                         <Route path="" exact element={<Home/>}/>
                         <Route path="/login" exact element={<Login/>}/>
@@ -36,7 +70,7 @@ function App() {
                         <Route path="/register" exact element={<Register/>}/>
                         <Route path="/forgot-password" exact element={<ForgotPassword/>}/>
                         <Route path="/profile" exact element={<Profile/>}/>
-                    <Route path="/chat" exact element={<Chat />}/>
+                        <Route path="/chat" exact element={<Chat />}/>
                     </Routes>
                 </Router>
 
