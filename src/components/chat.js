@@ -27,10 +27,11 @@ const Chat= ()=> {
     }
 
     const [room,setRoom] = useState("")
-
+    const [showChat, setShowChat] = useState(false)
     const joinRoom = (room) => {
         if(room !== ""){
             socket.emit("join_room",room)
+            setShowChat(true)
         }
     }
 
@@ -51,11 +52,10 @@ const Chat= ()=> {
                                 return fullName.toLowerCase().includes(filter.toLowerCase())
                         }).map((filteredUser,key)=> {
                             return(
-                                <span
-                                    style={{marginBottom:"20px"}}
-                                >
-                                    <button onClick={()=> {
-
+                                <div
+                                    style={{marginBottom:"20px",cursor:"pointer"}}
+                                    onClick={()=> {
+                                        setShowChat(false)
                                         const self = user._id;
                                         const target = filteredUser._id;
                                         console.log(self)
@@ -65,10 +65,10 @@ const Chat= ()=> {
                                             console.log(chat)
                                             joinRoom(chat.roomId)
                                         })
-
-                                    }}>Join a Room</button>
+                                    }}
+                                >
                                     <PeopleCardList key={key} user={filteredUser} />
-                                </span>
+                                </div>
                             )
                         })) : (<p>Loading...</p>)}
                     </div>
@@ -77,9 +77,9 @@ const Chat= ()=> {
 
             </div>
             <div className="chat_conversation">
-                {user ? (
-                    <ChatConversation socket={socket} username={user.firstName} room={room}/>
-                ): (<p>Loading...</p>)}
+                {user && room && showChat ? (
+                    <ChatConversation socket={socket} username={user.firstName} room={room} conversation={[]}/>
+                ): (<p>Choose to Chat with someone</p>)}
             </div>
         </div>
     );
