@@ -34,6 +34,14 @@ const UserSchema = new Schema(
             type: String,
             required: false,
         },
+        secret: {
+            type: String,
+            required: true,
+        },
+        profilePic: {
+            type: String,
+            required: false
+        }
     },
     {
         timestamps: true
