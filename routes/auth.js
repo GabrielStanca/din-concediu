@@ -128,8 +128,8 @@ router.get("/current", requiresAuth, (req, res) => {
 })
 
 
-// @route       PATCH /api/auth/current
-// @desc        Edit the logged-in user
+// @route       DELETE /api/auth/current
+// @desc        Delete the logged-in user
 // @access      Private
 
 router.patch("/current", requiresAuth, async (req, res) => {
@@ -138,28 +138,56 @@ router.patch("/current", requiresAuth, async (req, res) => {
             return res.status(401).send("Unauthorized");
         }
 
-        const {errors, isValid} = validateEditInput(req.body);
-        if (!isValid) {
-            return res.status(400).json(errors)
-        }
-        
         const userId = jwt.decode(req.cookies["access-token"]).userId
-        const update = req.body;
-        const updatedUser = await User.findByIdAndUpdate(userId, update, {
+        const currentUser = await User.findById(userId);
+        const userData = req.body;
+        let userToBeSent = {...userData};
+
+        if (!currentUser) {
+            return res.status(404).send("User not found")
+        }
+
+        if (userData.oldPassword) {
+
+            const passwordMatch = await bcrypt.compare(
+                userData.oldPassword,
+                currentUser.password
+            );
+
+            if (!passwordMatch) {
+                return res.status(400).send("Bad credentials")
+            }
+
+            userToBeSent.newPassword = await bcrypt.hash(userToBeSent.newPassword, 12);
+            delete userToBeSent.oldPassword;
+            delete userToBeSent.confirmPassword;
+
+            userToBeSent = {
+                password: userToBeSent.newPassword
+            }
+
+            console.log(userToBeSent)
+
+        } else {
+
+            const {errors, isValid} = validateEditInput(userData);
+            if (!isValid) {
+                return res.status(400).json(errors)
+            }
+        }
+
+        const updatedUser = await User.findByIdAndUpdate(userId, userToBeSent, {
             new: true, // return the updated document instead of the original
             runValidators: true, // validate the update against the model's schema
         });
 
         res.json(updatedUser);
 
+
     } catch (err) {
         res.status(500).send("Server Error");
     }
 })
-
-// @route       DELETE /api/auth/current
-// @desc        Delete the logged-in user
-// @access      Private
 
 router.delete("/current", requiresAuth, async (req, res) => {
     try {
