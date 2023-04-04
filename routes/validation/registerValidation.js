@@ -35,7 +35,7 @@ const validateRegisterInput = (data) => {
     if(isEmpty(data.email)) {
         errors.phone = "Phone field should not be empty"
     } else if (!Validator.isMobilePhone(data.phone)){
-        errors.email = "Phone is not valid.";
+        errors.phone = "Phone is not valid.";
     }
 
     return {
