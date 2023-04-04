@@ -124,7 +124,11 @@ router.get("/current", requiresAuth, (req, res) => {
         return res.status(401).send("Unauthorized");
     }
 
-    return res.json(req.user);
+    if(req.query.disconnect  === "true") {
+        res.clearCookie("access-token");
+        return res.status(200).send("User disconnected");
+    }
+    return  res.status(200).json(req.user);
 
 })
 
