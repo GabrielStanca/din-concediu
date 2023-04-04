@@ -157,4 +157,25 @@ router.patch("/current", requiresAuth, async (req, res) => {
     }
 })
 
+// @route       DELETE /api/auth/current
+// @desc        Delete the logged-in user
+// @access      Private
+
+router.delete("/current", requiresAuth, async (req, res) => {
+    try {
+        const userId = jwt.decode(req.cookies["access-token"]).userId
+
+        const deletedUser = await User.findByIdAndDelete(userId);
+        if (!deletedUser) {
+            return res.status(404).send("User not found");
+        }
+
+        res.clearCookie("access-token"); // clear the access-token cookie
+        res.send("User deleted successfully");
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send("Server Error");
+    }
+})
+
 module.exports = router;
