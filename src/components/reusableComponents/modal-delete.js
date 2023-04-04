@@ -3,6 +3,7 @@ import Modal from "react-modal";
 import "../../style/modal-delete.css";
 import { ReactModal } from "react-modal";
 import {deleteCurrentUser} from "../../services/deleteCurrentUser";
+import "../../style/theme.css"
 
 Modal.setAppElement("#root");
 
@@ -16,9 +17,10 @@ const DeleteAccountModal = ({ isOpen, closeModal, onDelete }) => {
     document.location.href = "/login"
     closeModal();
   };
+  
 
   return (
-    <Modal className="delete-modal" isOpen={isOpen} onRequestModal={closeModal}>
+    <Modal className={`delete-modal`} isOpen={isOpen} onRequestModal={closeModal}>
       <div className="delete-modal-container">
         <h1>Are you sure you want to delete your account?</h1>
         <p> This action cannot be undone.</p>

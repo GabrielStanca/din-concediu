@@ -18,7 +18,7 @@
     width: 30%;
     background-color: white;
     border-radius: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--quaternary-color);
     padding: 0 20px 20px 20px;
     z-index: 100;
     display: flex;
@@ -38,8 +38,8 @@
 }
 
 .delete-modal-cancel-button {
-    background-color: #1904e5;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--tertiary-color);
     font-size: 15px;
     font-weight: 500;
     text-transform: uppercase;
@@ -50,13 +50,13 @@
     cursor: pointer;
 }
 .delete-modal-cancel-button:hover {
-    background-color: #1a04e5dc;
+    background-color: var(--hover-color-cancel);
 
 }
 .delete-modal-submit-button {
     background-color: transparent;
-    border: 1px solid #1904e5;
-    color: black;
+    border: 1px solid var(--primary-color);
+    color: var(--quaternary-color);
     font-size: 15px;
     font-weight: 500;
     text-transform: uppercase;
@@ -67,5 +67,5 @@
 }
 
 .delete-modal-submit-button:hover {
-    background-color: #1a04e559;
+    background-color: var(--hover-color-submit);
 }

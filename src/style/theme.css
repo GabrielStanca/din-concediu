@@ -1,0 +1,33 @@
+
+:root {
+    --primary-color: #1904e5;
+    --secondary-color: #fab2ff;
+    --tertiary-color: #ffffff;
+    --quaternary-color: #000000;
+    --quinary-color: #1a04e562;
+    --card-color: rgb(25, 4, 229);
+    --box-shadow-color: rgba(25, 4, 229, 0.9);
+    --icon-color: rgb(94, 86, 86);
+    --hover-color-submit: #1a04e559;
+    --hover-color-cancel: #1a04e5be;
+    --hover-change-password-color: #1904e5c7;
+  
+  }
+  
+  .theme-dark {
+    --primary-color: #ffffff;
+    --secondary-color: #fab2ff;
+    --tertiary-color:  #000000;
+    --quaternary-color: #ffffff;
+    --quinary-color: #ffffff62;
+    --card-color: #ffffff;
+    --box-shadow-color: rgba(255, 255, 255, 0.9);
+    --icon-color: #ffffff;
+    --hover-color-submit: #ffffff59;
+    --hover-color-cancel: #ffffffbe;
+    --hover-change-password-color: #ffffffc7;
+  }
+  
+  .color-black {
+    color: var(--quaternary-color);
+  }
