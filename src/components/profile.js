@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "../style/profile.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import noPhoto from "../images/no-photo.png";
 import {
   faPhone,
   faUserTie,
@@ -8,13 +9,13 @@ import {
   faPenToSquare,
   faCheck,
   faTrash,
+  faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { Tabs, TabList, TabPanel, Tab } from "react-tabs";
 import { useSearchParams } from "react-router-dom";
 import { useGlobalContext } from "../context/GlobalContext";
 import { editCurrentUser } from "../services/editCurrentUser";
 import DeleteAccountModal from "./reusableComponents/modal-delete";
-import { ReactModal } from "react-modal";
 
 const Profile = () => {
   const { user } = useGlobalContext();
@@ -27,6 +28,7 @@ const Profile = () => {
     gender: "",
     birthDate: "",
     description: "",
+    imageUser: "",
   });
 
   const genderOptions = [
@@ -54,6 +56,7 @@ const Profile = () => {
         gender: user.gender || "-",
         birthDate: user.birthDate || "-",
         description: user.description || "",
+        imageUser: user.imageUser || "",
       });
     }
   }, [user]);
@@ -61,25 +64,19 @@ const Profile = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [activeTabIndex, setActiveTabIndex] = useState(0);
   const [activeThemeIndex, setActiveThemeIndex] = useState(0);
-  const [userImage, setUserImage] = useState(null);
   const [editSuccess, setEditSuccess] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [changePassword, setChangePassword] = useState(false);
+  const [changePassword, setChangePassword] = useState({
+    oldPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [theme, setTheme] = useState("default");
 
-  const [imageModal, setImageModal] = useState(false);
-  const [image, setImage] = useState("");
-
-  const handleImageUserChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setImage(e.target.result);
-      };
-      reader.readAsDataURL(file);
-    }
+  const handleThemeButtonClick = (theme) => {
+    setTheme(theme === 0 ? "default" : "dark");
   };
-
+  
   const handleButtonClick = (index) => {
     setActiveThemeIndex(index);
   };
@@ -122,16 +119,22 @@ const Profile = () => {
     setIsModalOpen(true);
   };
 
-  const handleOpenImageModal = () => {
-    setImageModal(true);
+  const handleImageChange = (e) => {
+    const image = e.target.files[0];
+    const formData = new FormData();
+    formData.append("image", image);
+    editCurrentUser(formData)
+      .then((res) => {
+        setUserDetails({
+          ...userDetails,
+          imageUser: URL.createObjectURL(image),
+        });
+      })
+      .catch((err) => console.log(err));
   };
-
-  const handleCloseImageModal = () => {
-    setImageModal(false);
-  };
-  
 
   return (
+    <html className={`theme-${theme} html-page`}>
     <div className="profile__page">
       <DeleteAccountModal
         isOpen={isModalOpen}
@@ -145,37 +148,40 @@ const Profile = () => {
         </div>
       ) : null}
 
-      
-      {imageModal ? (
-        <div className="profile__banner--modal-open">
-        <div className="profile__banner__image--modal-open">
-          <img src={image} alt="Profile Banner" />
-        </div>
-        <input type="file" onChange={handleImageUserChange} />
-        <button onClick={handleCloseImageModal}>Save</button>
+      <div className="profile__banner">
+        <FontAwesomeIcon icon={faPlus} className="plus-icon" />
+        {userDetails.imageUser ? (
+          <img
+            src={userDetails.imageUser}
+            alt="user"
+            className="profile__banner__image-user"
+            onClick={() => document.getElementById("fileInput").click()}
+          />
+        ) : (
+          <img
+            src={noPhoto}
+            alt="user"
+            className="profile__banner__image-user"
+            onClick={() => document.getElementById("fileInput").click()}
+            onChange={handleImageChange}
+          />
+        )}
+        <input
+          type="file"
+          id="fileInput"
+          style={{ display: "none" }}
+          onChange={handleImageChange}
+        />
       </div>
-      ) : (
-        <div className="profile__banner">
-          <div className="profile__banner__image"
-          onMouseEnter={handleOpenImageModal}
-          >
-            {userImage ? (
-              <img src={userImage} alt="Profile Banner" />
-            ) : (
-              <></>
-            )}
 
-          </div>
-        </div>
-      )}
       <div className="profile__container">
         <div className="profile__container__details__main">
           {searchParams.get("action") !== "edit-details" ? (
             <>
-              <p className="profile__container__details__name">
+              <p className="profile__container__details__name color-black">
                 {`${userDetails.firstName}  ${userDetails.lastName}`}
               </p>
-              <p className="profile__container__details__email">
+              <p className="profile__container__details__email color-black">
                 {userDetails.email}
               </p>
             </>
@@ -188,13 +194,19 @@ const Profile = () => {
             <TabList className="tab-list">
               <Tab
                 className={`tab ${activeTabIndex === 0 ? "active" : ""}`}
-                onClick={() => setActiveTabIndex(0)}
+                onClick={() => {
+                  setActiveTabIndex(0)
+                  setSearchParams({action: "details"})
+                }}
               >
                 My Account
               </Tab>
               <Tab
                 className={`tab ${activeTabIndex === 1 ? "active" : ""}`}
-                onClick={() => setActiveTabIndex(1)}
+                onClick={() => {
+                  setActiveTabIndex(1)
+                  setSearchParams({action: "details"})
+                }}
               >
                 Settings
               </Tab>
@@ -204,27 +216,27 @@ const Profile = () => {
             <div className="profile__container__details">
               {searchParams.get("action") !== "edit-details" ? (
                 <div className="profile__container__details__container">
-                  <p className="profile__container__details__title">
+                  <p className="profile__container__details__title color-black">
                     <FontAwesomeIcon
                       icon={faPenToSquare}
-                      className="padding-icons cursor-pointer"
+                      className="padding-icons cursor-pointer title-icon"
                       onClick={() => handleClick(searchParams)}
                     ></FontAwesomeIcon>
                     Details:
                   </p>
                   <hr className="details-hr"></hr>
-                  <p className="profile__container__details__phone">
+                  <p className="font-size-16 color-black">
                     <FontAwesomeIcon icon={faPhone} className="padding-icons" />
                     {userDetails.phone}
                   </p>
-                  <p>
+                  <p className="font-size-16 color-black">
                     <FontAwesomeIcon
                       icon={faUserTie}
-                      className="padding-icons"
+                      className="padding-icons "
                     />
                     {userDetails.gender}
                   </p>
-                  <p>
+                  <p className="font-size-16 color-black">
                     <FontAwesomeIcon
                       icon={faCalendar}
                       className="padding-icons"
@@ -234,10 +246,10 @@ const Profile = () => {
                 </div>
               ) : (
                 <div className="profile__container__details__edit">
-                  <label htmlFor="firstName">First Name:</label>
+                  <label htmlFor="firstName" className="color-black">First Name:</label>
                   <input
                     id="firstName"
-                    className="edit-inputs"
+                    className="edit-inputs color-black"
                     value={userDetails.firstName}
                     onChange={(e) => {
                       setUserDetails({
@@ -246,10 +258,10 @@ const Profile = () => {
                       });
                     }}
                   ></input>
-                  <label htmlFor="lastName">Last Name:</label>
+                  <label htmlFor="lastName" className="color-black">Last Name:</label>
                   <input
                     id="lastName"
-                    className="edit-inputs"
+                    className="edit-inputs color-black"
                     value={userDetails.lastName}
                     onChange={(e) => {
                       setUserDetails({
@@ -258,28 +270,28 @@ const Profile = () => {
                       });
                     }}
                   ></input>
-                  <label htmlFor="email">Email:</label>
+                  <label htmlFor="email" className="color-black">Email:</label>
                   <input
                     id="email"
-                    className="edit-inputs"
+                    className="edit-inputs color-black"
                     value={userDetails.email}
                     onChange={(e) => {
                       setUserDetails({ ...userDetails, email: e.target.value });
                     }}
                   ></input>
-                  <label htmlFor="phone">Phone:</label>
+                  <label htmlFor="phone" className="color-black">Phone:</label>
                   <input
                     id="phone"
-                    className="edit-inputs"
+                    className="edit-inputs color-black"
                     value={userDetails.phone}
                     onChange={(e) => {
                       setUserDetails({ ...userDetails, phone: e.target.value });
                     }}
                   ></input>
-                  <label htmlFor="gender">Gender:</label>
+                  <label htmlFor="gender" className="color-black">Gender:</label>
                   <select
                     id="gender"
-                    className="profile-edit-select cursor-pointer"
+                    className="profile-edit-select cursor-pointer color-black"
                     value={userDetails.gender || "Choose"}
                     onChange={(e) => {
                       setUserDetails({
@@ -289,16 +301,16 @@ const Profile = () => {
                     }}
                   >
                     {genderOptions.map((option) => (
-                      <option key={option.value} value={option.value}>
+                      <option key={option.value} value={option.value} className="color-black">
                         {option.label}
                       </option>
                     ))}
                   </select>
 
-                  <label htmlFor="birthDate">Date of birth:</label>
+                  <label htmlFor="birthDate" className="color-black">Date of birth:</label>
                   <input
                     type="date"
-                    className="edit-birth-date"
+                    className="edit-birth-date color-black"
                     value={userDetails.birthDate}
                     id="birthDate"
                     onChange={(e) => {
@@ -344,16 +356,16 @@ const Profile = () => {
               )}
               {searchParams.get("action") !== "edit-description" ? (
                 <div className="profile__container__about-me">
-                  <p className="profile__container__about-me__title">
+                  <p className="profile__container__about-me__title font-size-16 color-black">
                     <FontAwesomeIcon
                       icon={faPenToSquare}
-                      className="padding-icons cursor-pointer"
+                      className="padding-icons cursor-pointer title-icon"
                       onClick={() => handleClickEditDescription(searchParams)}
                     ></FontAwesomeIcon>
                     About me:
                   </p>
                   <hr className="details-hr"></hr>
-                  <p className="profile__container__about-me-description">
+                  <p className="profile__container__about-me-description font-size-16 color-black">
                     {userDetails.description}
                   </p>
                 </div>
@@ -361,9 +373,9 @@ const Profile = () => {
                 <>
                   <div className="profile__container__about-me__edit">
                     <textarea
-                      className="profile-edit-textarea"
+                      className="profile-edit-textarea color-black"
                       placeholder="Write something about yourself..."
-                      maxLength={200}
+                      maxLength={400}
                       value={userDetails.description}
                       onChange={(e) => {
                         setUserDetails({
@@ -410,18 +422,24 @@ const Profile = () => {
                     className={`settings_default-theme ${
                       activeThemeIndex === 0 ? "active" : ""
                     }`}
-                    onClick={() => handleButtonClick(0)}
+                    onClick={() =>{handleButtonClick(0)
+                      handleThemeButtonClick(0)
+                    }}
                   ></button>
-                  <p className="profile__settings__theme">Default</p>
+                  <p className="profile__settings__theme color-black">Default</p>
                 </div>
                 <div className="settings_themes">
                   <button
                     className={`settings_dark-theme ${
                       activeThemeIndex === 1 ? "active" : ""
                     }`}
-                    onClick={() => handleButtonClick(1)}
+                    onClick={() =>{
+                      handleButtonClick(1)
+                      handleThemeButtonClick(1)
+                      
+                    }}
                   ></button>
-                  <p className="profile__settings__theme">Dark Theme</p>
+                  <p className="profile__settings__theme color-black">Dark Theme</p>
                 </div>
               </div>
               {searchParams.get("action") !== "change-password" ? (
@@ -505,12 +523,9 @@ const Profile = () => {
                       <button
                         className="edit-submit-details-button edit-buttons"
                         onClick={() => {
-                          changePassword(changePassword);
-                          setChangePassword({
-                            oldPassword: "",
-                            newPassword: "",
-                            confirmPassword: "",
-                          });
+                          editCurrentUser(changePassword);
+                          handleClickRemove(searchParams);
+                          setEditSuccess(true);
                         }}
                       >
                         Save
@@ -524,6 +539,7 @@ const Profile = () => {
         </Tabs>
       </div>
     </div>
+    </html>
   );
 };
 

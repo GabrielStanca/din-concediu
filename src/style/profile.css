@@ -1,56 +1,82 @@
-.profile__page {
-  padding: 30px;
+:root {
+  --primary-color: #1904e5;
+  --secondary-color: #fab2ff;
+  --tertiary-color: #ffffff;
+  --quaternary-color: #000000;
+  --quinary-color: #1a04e562;
+  --card-color: rgb(25, 4, 229);
+  --box-shadow-color: rgba(25, 4, 229, 0.9);
+  --icon-color: rgb(94, 86, 86);
+
+}
+
+.theme-dark {
+  --primary-color: #ffffff;
+  --secondary-color: #fab2ff;
+  --tertiary-color:  #000000;
+  --quaternary-color: #ffffff;
+  --quinary-color: #ffffff62;
+  --card-color: #ffffff;
+  --box-shadow-color: rgba(255, 255, 255, 0.9);
+  --icon-color: #ffffff;
+}
+
+.color-black {
+  color: var(--quaternary-color);
+}
+
+.html-page {
   height: 100vh;
   overflow: auto;
+  padding: 30px;
+  background-color: var(--tertiary-color);
 }
 
 .profile__banner {
   height: 100px;
   position: relative;
   z-index: 1;
-  background-image: linear-gradient(#fab2ff, #1904e5);
+  background-image: linear-gradient(var(--secondary-color), var(--primary-color));
   border-radius: 10px;
 }
 
-.profile__banner__modal--open {
-  position: static;
-  height: 100px;
-  z-index: 1;
-  background-image: linear-gradient(#fab2ff, #1904e5);
-  border-radius: 10px;
-}
-
-.profile__banner__image--modal-open {
-  position: static;
-  content: "";
-  width: 100px;
-  height: 100px;
-  border: 3px solid white;
-  border-radius: 50%;
-  transform: translateY(50%);
-  margin-left: 20px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: linear-gradient(#fab2ff, #1904e5);
-  z-index: -1;
-}
-
-.profile__banner::before {
+.profile__banner__image-user {
   content: "";
   position: absolute;
   width: 100px;
   height: 100px;
-  border: 3px solid white;
+  border: 3px solid var(--tertiary-color);
   border-radius: 50%;
   transform: translateY(50%);
   margin-left: 20px;
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: linear-gradient(#fab2ff, #1904e5);
   z-index: -1;
+  background-color:var(--secondary-color);
+} 
+
+.font-size-16 {
+  font-size: 16px;
 }
+
+.plus-icon {
+  top:40%;
+  left: 40%;
+  position: absolute;
+  display: none;
+  color: var(--tertiary-color);
+  z-index: 999;
+}
+
+.profile__banner__image-user:hover {
+  cursor: pointer;
+}
+
+.profile__banner__image-user:hover .plus-icon {
+  display: block;
+}
+
 
 .profile__container {
   margin-top: 50px;
@@ -78,18 +104,18 @@
 }
 
 .profile__container__details__title {
-  font-size: 15px;
+  font-size: 20px;
   margin: 0 auto;
   margin-bottom: 10px;
   top: 0;
   font-family: "Roboto", sans-serif;
-  background-color: white;
+  background-color: var(--tertiary-color);
   font-weight: 300;
   text-transform: uppercase;
 }
 
 .details-hr {
-  border: 1px solid #1a04e562;
+  border: 1px solid var(--quinary-color);
   width: 100%;
   margin-top: 0;
 }
@@ -100,16 +126,16 @@
   flex-direction: column;
   padding: 0px 20px;
   border-radius: 10px;
-  height: 200px;
+  height: 250px;
   width: 30%;
-  background-color: white;
-  box-shadow: rgba(25, 4, 229, 0.9) 0px 1px 10px;
+  background-color: var(--tertiary-color);
+  box-shadow: var(--box-shadow-color) 0px 1px 10px;
 }
 
 .padding-icons {
   padding-right: 10px;
-  font-size: 15px;
-  color: rgb(94, 86, 86);
+  font-size: 16px;
+  color: var(--icon-color);
 }
 
 .tabs-container {
@@ -118,7 +144,7 @@
   justify-content: center;
   align-items: center;
   position: relative;
-  border: 1px solid #1904e5;
+  border: 1px solid var(--primary-color);
   margin-top: 50px;
 }
 .tab-list {
@@ -134,15 +160,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: white;
+  background-color: var(--tertiary-color);
   box-shadow: rgba(0, 0, 0, 0.45) 0px 15px 20px -20px;
   margin-right: 10px;
   font-size: 12px;
   font-weight: 600;
   text-transform: uppercase;
-  color: rgb(25, 4, 229);
+  color: var(--card-color);
   cursor: pointer;
-  border: 1px solid rgb(25, 4, 229);
+  border: 1px solid var(--card-color);
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding: 10px 20px;
@@ -150,8 +176,8 @@
 
 .tab-list .tab.active {
   border-bottom: none;
-  background-color: white;
-  color: black;
+  background-color: var(--tertiary-color);
+  color: var(--quaternary-color);
   transform: translateY(1px);
 }
 
@@ -164,19 +190,19 @@
   flex-direction: column;
   padding: 0px 20px;
   border-radius: 10px;
-  height: 200px;
+  height: 250px;
   width: 70%;
-  background-color: white;
-  box-shadow: rgba(25, 4, 229, 0.9) 0px 1px 10px;
+  background-color: var(--tertiary-color);
+  box-shadow: var(--box-shadow-color) 0px 1px 10px;
 }
 
 .profile__container__about-me__title {
-  font-size: 15px;
+  font-size: 20px;
   margin: 0 auto;
   margin-top: 20px;
   margin-bottom: 10px;
   font-family: "Roboto", sans-serif;
-  background-color: white;
+  background-color: var(--tertiary-color);
   font-weight: 300;
   text-transform: uppercase;
 }
@@ -196,23 +222,23 @@
 }
 
 .profile__container__settings button.active:focus {
-  border: 1px solid #000000;
+  border: 1px solid var(--quaternary-color);
 }
 
 .profile__container__settings button:focus {
-  border: 1px solid #000000;
+  border: 1px solid var(--quaternary-color);
 }
 
 .profile__container__settings button:active {
-  border: 1px solid #000000;
+  border: 1px solid var(--quaternary-color);
 }
 
 .settings_default-theme {
-  background-image: linear-gradient(#fab2ff, #1904e5);
+  background-image: linear-gradient(var(--secondary-color), var(--primary-color));
 }
 
 .settings_dark-theme {
-  background-image: linear-gradient(#000000, #ffffff);
+  background-image: linear-gradient(var(--quaternary-color), var(--tertiary-color));
 }
 
 .settings_themes {
@@ -233,16 +259,16 @@
   border-radius: 10px;
   height: 500px;
   width: 30%;
-  background-color: white;
-  box-shadow: rgba(25, 4, 229, 0.9) 0px 1px 10px;
+  background-color: var(--tertiary-color);
+  box-shadow: var(--box-shadow-color) 0px 1px 10px;
   margin-right: 0px;
   row-gap: 10px;
 }
 
 .edit-inputs {
   border: none;
-  border-bottom: 1px solid #1904e5;
-  background-color: white;
+  border-bottom: 1px solid var(--primary-color);
+  background-color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 10px;
@@ -261,8 +287,8 @@
 }
 
 .edit-birth-date {
-  border: 1px solid #1904e5;
-  background-color: white;
+  border: 1px solid var(--primary-color);
+  background-color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 10px;
@@ -275,8 +301,8 @@
 
 .edit-submit-details-button {
   background-color: transparent;
-  border: 1px solid #1904e5;
-  color: black;
+  border: 1px solid var(--primary-color);
+  color: var(--quaternary-color);
   font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -288,8 +314,8 @@
 }
 
 .edit-cancel-details-button {
-  background-color: #1904e5;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -298,7 +324,7 @@
 
 .edit-cancel-details-button:hover {
   background-color: #1a04e5be;
-  color: white;
+  color: var(--tertiary-color);
 }
 
 .profile-edit-buttons {
@@ -312,15 +338,15 @@
   flex-direction: column;
   padding: 10px 20px;
   border-radius: 10px;
-  height: 300px;
+  height: 230px;
   width: 70%;
-  background-color: white;
-  box-shadow: rgba(25, 4, 229, 0.9) 0px 1px 10px;
+  background-color: var(--tertiary-color);
+  box-shadow: var(--box-shadow-color) 0px 1px 10px;
 }
 
 .profile-edit-textarea {
   border: none;
-  background-color: white;
+  background-color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 10px;
@@ -343,8 +369,8 @@
 }
 
 .profile-edit-select {
-  border: 1px solid #1904e5;
-  background-color: white;
+  border: 1px solid var(--primary-color);
+  background-color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 300;
   margin-bottom: 10px;
@@ -403,7 +429,7 @@
 
 
 .toast__text {
-  color: white;
+  color: var(--tertiary-color);
   font-size: 16px;
   font-weight: 500;
   text-transform: uppercase;
@@ -414,18 +440,18 @@
   width: 30px;
   height: 30px;
   margin-right: 10px;
-  color: white;
+  color: var(--tertiary-color);
 }
 
 .profile__container__settings__theme {
   padding-right: 10%;
-  border-right: 2px solid #1904e5;
+  border-right: 2px solid var(--primary-color);
 
 }
 
 .settings__delete-account__button {
   background-color: red;
-  color: white;
+  color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -462,7 +488,7 @@
 .settings__change-password {
   width: 30%;
   margin: 0px 5%;
-  border-right: 1px solid #1904e5;
+  border-right: 1px solid var(--primary-color);
 }
 
 .settings__change-password__inputs {
@@ -473,8 +499,8 @@
   border-radius: 10px;
   height: 300px;
   width: 100%;
-  background-color: white;
-  box-shadow: rgba(25, 4, 229, 0.9) 0px 1px 10px;
+  background-color: var(--tertiary-color);
+  box-shadow: var(--box-shadow-color) 0px 1px 10px;
   row-gap: 10px;
 
 
@@ -494,8 +520,8 @@
 }
 
 .profile__container__settings__change-password__button {
-  background-color: #1904e5;
-  color: white;
+  background-color: var(--primary-color);
+  color: var(--tertiary-color);
   font-size: 15px;
   font-weight: 500;
   text-transform: uppercase;
@@ -517,9 +543,15 @@
   flex-direction: column;
   row-gap: 20px;
 }
+
 .trash-icon {
   width: 16px;
   height: 16px;
   margin-right: 10px;
-  color: white;
+  color: var(--tertiary-color);
+}
+
+.title-icon {
+  width:20px;
+  height: 20px;
 }
