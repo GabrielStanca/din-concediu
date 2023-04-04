@@ -10,7 +10,7 @@ import Profile from "./components/profile";
 import {GlobalProvider, useGlobalContext} from "./context/GlobalContext";
 import TB_transparent from "../src/images/TB_transparent.svg"
 import Chat from "./components/chat";
-import {faBars, faLock, faCircleDot} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faLock, faCircleDot, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {getCurrentUser} from "./services/getCurrentUser"
 
@@ -54,7 +54,7 @@ function App() {
                                     <>
                                         <Link to="/chat"><span>Chat</span></Link>
                                         <Link to="/profile"><span>Profile</span></Link>
-                                        <Link to = "/login"><button onClick={handleDisconnect}>Disconnect</button></Link>
+                                        <Link to = "/login"><button style={{background:"transparent", border: 0}} onClick={handleDisconnect}><FontAwesomeIcon style={{cursor:"pointer"}} icon={faRightFromBracket} /></button></Link>
                                     </>
 
                                 ) : (
