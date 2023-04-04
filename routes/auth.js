@@ -60,7 +60,7 @@ router.post("/register", async (req, res) => {
         // Return the new user
         return res.json(userToReturn);
     } catch (err) {
-        res.status(500).send(err.message);
+        return res.status(500).send(err.message);
     }
 });
 

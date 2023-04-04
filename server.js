@@ -11,6 +11,7 @@ const { Server } = require("socket.io")
 const authRoute = require("./routes/auth")
 const usersRoute = require("./routes/users")
 const forgotRoute = require("./routes/forgot")
+const chatsRoute = require("./routes/chats")
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cors({
 app.use("/api/auth", authRoute);
 app.use("/api/users", usersRoute);
 app.use("/api/forgot", forgotRoute);
+app.use("/api/chats", chatsRoute);
 
 mongoose.connect(process.env.MONGO_URI)
     .then(() => {

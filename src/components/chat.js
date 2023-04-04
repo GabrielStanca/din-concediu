@@ -7,6 +7,7 @@ import {getAllUsers} from "../services/getAllUsers";
 import {useGlobalContext} from "../context/GlobalContext";
 import io from "socket.io-client"
 import ChatConversation from "./chat-conversation";
+import {createChat} from "../services/createChat";
 
 const socket = io.connect("http://localhost:5000")
 
@@ -52,13 +53,21 @@ const Chat= ()=> {
                             return(
                                 <span
                                     style={{marginBottom:"20px"}}
-                                    onClick={()=> {
-                                    setRoom(`${filteredUser._id}_`)
-                                    joinRoom(`${filteredUser._id}_`)
-                                    }}
                                 >
-                                    <button onClick={()=>joinRoom()}>Join a Room</button>
-                                    <PeopleCardList key={key} user={filteredUser}/>
+                                    <button onClick={()=> {
+
+                                        const self = user._id;
+                                        const target = filteredUser._id;
+                                        console.log(self)
+                                        console.log(target)
+                                        createChat({targetId: target, initiatorId: self}).then((chat) => {
+                                            setRoom(chat.roomId)
+                                            console.log(chat)
+                                            joinRoom(chat.roomId)
+                                        })
+
+                                    }}>Join a Room</button>
+                                    <PeopleCardList key={key} user={filteredUser} />
                                 </span>
                             )
                         })) : (<p>Loading...</p>)}
