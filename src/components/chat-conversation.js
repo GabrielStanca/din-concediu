@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import "../style/chat.css"
-const ChatConversation = ({socket, username, room}) => {
+const ChatConversation = ({socket, username, room, conversation}) => {
 
     const [currentMessage,setCurrentMessage] = useState("")
-    const [messageList,setMessageList] = useState([])
+    const [messageList,setMessageList] = useState( conversation)
     const [currentAuthor, setCurrentAuthor] = useState("")
     console.log(room,"room")
     const sendMessage = async () =>{
@@ -17,7 +17,7 @@ const ChatConversation = ({socket, username, room}) => {
 
             await socket.emit("send_message", messageData)
             setMessageList((list)=> [...list,messageData])
-
+            setCurrentMessage("")
         }
     }
 
@@ -34,7 +34,7 @@ const ChatConversation = ({socket, username, room}) => {
     return(
         <>
             <div className="chat_header">
-                <p>Live Chat</p>
+                <p>{username} you are on a Live Chat</p>
             </div>
             <div className="chat_body">
                 <ul className={"chat_arrange"}>
@@ -58,7 +58,7 @@ const ChatConversation = ({socket, username, room}) => {
 
             </div>
             <div className="chat_footer">
-                <input type="text" onChange={(e)=>setCurrentMessage(e.target.value)} placeholder="Send message..."/>
+                <input type="text" value={currentMessage} onChange={(e)=>setCurrentMessage(e.target.value)} placeholder="Send message..."/>
                 <button onClick={()=>sendMessage()}>&#9658;</button>
             </div>
         </>
