@@ -9,6 +9,7 @@
   justify-content: space-between;
   padding: 20px 30px;
   background: antiquewhite;
+  position: relative;
 }
 .App nav a {
   color: black;
