@@ -11,7 +11,8 @@ const Register = () => {
         lastName: "",
         email: "",
         phone: "", // String because we use +40... format
-        password: ""
+        password: "",
+        secret: ""
     });
     const [error,setError] = useState(false)
     return (
@@ -83,6 +84,15 @@ const Register = () => {
                            placeholder="Confirm your password"
                            onChange={(e) => {
                                setRegisterUser({...registerUser, confirmPassword: e.target.value})
+                           }}
+                    />
+                </div>
+                <div className="register_input">
+                    <label htmlFor="secret"> <FontAwesomeIcon icon={faLock}/></label>
+                    <input name="secret" required id="secret" type="text"
+                           placeholder="Enter a secret"
+                           onChange={(e) => {
+                               setRegisterUser({...registerUser, secret: e.target.value})
                            }}
                     />
                 </div>

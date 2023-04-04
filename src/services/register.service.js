@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 export const registerUserService = async (user) => {
     try {
         let userToSend = {...user};
+        userToSend.secret = await bcrypt.hash(userToSend.secret, 12)
         userToSend.password = await bcrypt.hash(userToSend.password, 12)
         userToSend.confirmPassword = await bcrypt.hash(userToSend.confirmPassword, 12)
 
