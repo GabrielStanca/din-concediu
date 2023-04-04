@@ -21,9 +21,6 @@ const Login = () => {
                     if(data) {
                         document.location.href= `/chat?id=${data.user._id}`
                     }
-                    else
-                        alert("esti prost")
-
                 } catch (error) {
                     console.error(error);
                 }

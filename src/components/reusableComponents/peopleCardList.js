@@ -1,7 +1,7 @@
 import React from "react";
 import "../../style/chat.css"
-import TB from "../../images/TB.svg"
-const PeopleCardList = ({user}) => {
+import TB from "../../images/TB_transparent.svg"
+const PeopleCardList = ({user }) => {
     return (
         <div className="user-card-list_container">
             <div className="img_user_container">
