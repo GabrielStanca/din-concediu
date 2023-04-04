@@ -109,3 +109,30 @@ display: inline-block;
     margin-bottom: 20px;
     margin-right: 10px;
 }
+
+.chat_footer {
+    width: 100%;
+    height: 30px;
+    border-radius: 0 15px 15px 0;
+    position: relative;
+    background: white;
+}
+.chat_footer input {
+    color: black;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: 0;
+}
+.chat_footer button {
+    background: blue;
+    color: white;
+    border: 0;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
