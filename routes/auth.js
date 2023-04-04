@@ -47,7 +47,8 @@ router.post("/register", async (req, res) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
             phone: req.body.phone,
-            secret: req.body.secret
+            secret: req.body.secret,
+            imageUser: req.body.imageUser || ""
         });
 
         // Save user to db 
