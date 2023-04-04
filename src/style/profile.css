@@ -404,6 +404,9 @@
   opacity: 0;
   animation: toast-in 0.3s ease-out forwards, toast-out 0.3s ease-out 2s forwards;
 }
+.error_toast {
+  background-color: #ff0000;
+}
 
 @keyframes toast-in {
   from {

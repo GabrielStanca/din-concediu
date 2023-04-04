@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import '../style/user-connection.css'
 import '../App.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEnvelope, faLock} from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope, faLock, faX} from '@fortawesome/free-solid-svg-icons'
 import {loginUserService} from "../services/login.service";
 
 const Login = () => {
