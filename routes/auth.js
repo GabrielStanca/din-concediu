@@ -5,7 +5,7 @@ const bcrypt = require("bcryptjs");
 const validateRegisterInput = require("./validation/registerValidation");
 const jwt = require("jsonwebtoken");
 const requiresAuth = require("../middleware/permissions")
-
+const validateEditInput = require("./validation/editValidation")
 
 // @route       GET /api/auth/test
 // @desc        Test auth route
@@ -140,6 +140,11 @@ router.patch("/current", requiresAuth, async (req, res) => {
     try {
         if (!req.user) {
             return res.status(401).send("Unauthorized");
+        }
+
+        const {errors, isValid} = validateEditInput(req.body);
+        if (!isValid) {
+            return res.status(400).json(errors)
         }
         
         const userId = jwt.decode(req.cookies["access-token"]).userId
