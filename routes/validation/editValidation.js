@@ -1,10 +1,10 @@
 const Validator = require("validator");
 const isEmpty = require("./isEmpty");
 
-const validateRegisterInput = (data) => {
+const validateEditInput = (data) => {
     let errors = {};
 
-    //check name field  
+    //check name fields
     if (isEmpty(data.firstName)) {
         errors.firstName = "First Name field cannot be empty";
     } else if (!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
@@ -24,13 +24,6 @@ const validateRegisterInput = (data) => {
         errors.email = "Email is invalid.";
     }
 
-    //check password field
-    if (isEmpty(data.password)) {
-        errors.password = "Password field cannot be empty";
-    } else if (!Validator.isLength(data.password, { min: 8, max: 150 })) {
-        errors.password = "Password must be between 8 and 150 characters long";
-    }
-
     // check phone field
     if(isEmpty(data.email)) {
         errors.phone = "Phone field should not be empty"
@@ -45,4 +38,4 @@ const validateRegisterInput = (data) => {
     }
 }
 
-module.exports = validateRegisterInput;
+module.exports = validateEditInput;
