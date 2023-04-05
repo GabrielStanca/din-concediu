@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Modal from "react-modal";
 import "../../style/modal-delete.css";
 import { ReactModal } from "react-modal";
+import {deleteCurrentUser} from "../../services/deleteCurrentUser";
 
 Modal.setAppElement("#root");
 
@@ -10,8 +11,9 @@ const DeleteAccountModal = ({ isOpen, closeModal, onDelete }) => {
 
   const handleDelete = async () => {
     setIsDeleting(true);
-    await onDelete();
     setIsDeleting(false);
+    await deleteCurrentUser()
+    document.location.href = "/login"
     closeModal();
   };
 
