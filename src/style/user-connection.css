@@ -1,10 +1,11 @@
-.forgot-password_container,.login_container, .register_container {
+.forgot-password_container,.login_container, .register_container, .home_container {
     display: flex;
     justify-content: center;
     height: 100%;
     flex: 1 1 auto;
     align-items: center;
     background-image: linear-gradient( #fab2ff, #1904e5);
+    z-index: 1;
 }
 .forgot-password_container form, .login_container form, .register_container form {
     background: rgba(0,0,0,.5);
@@ -85,3 +86,59 @@
     color: black;
     border-radius: 10px;
 }
+
+.background-image-login {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    
+}
+
+.background-image-register {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.background-image-home {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.image-center-home {
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    transform: translateY(30%);
+}
+
+@media screen and (max-width: 768px) {
+    .background-image-login {
+        transform: translateY(200px);
+    }
+    .background-image-register {
+        transform: translateY(200px);
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .register_container form{
+        flex-direction: column;
+    }
+
+    .register_input {
+        height: 30px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .background-image-register {
+        transform: translateY(280px);
+    }
+}
+

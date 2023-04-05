@@ -8,7 +8,7 @@
   flex: 0 1 auto;
   justify-content: space-between;
   padding: 20px 30px;
-  background: antiquewhite;
+  background: rgb(233, 219, 202);
   position: relative;
 }
 .App nav a {

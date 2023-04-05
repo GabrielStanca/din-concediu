@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import "../style/user-connection.css"
 import {faEnvelope, faLock, faUserTie, faPhone} from "@fortawesome/free-solid-svg-icons";
 import {registerUserService} from "../services/register.service"
+import Background from "../images/background.svg"
 
 const Register = () => {
 
@@ -17,6 +18,7 @@ const Register = () => {
     const [error,setError] = useState(false)
     return (
         <div className="register_container">
+            <img className="background-image-register" src={Background} alt={"background"}/>
             <form onSubmit={async (e) => {
                 e.preventDefault()
                 try {
