@@ -119,29 +119,6 @@ const Profile = () => {
         setIsModalOpen(true);
     };
 
-    const handleImageChange = (e) => {
-        const image = e.target.files[0];
-        const reader = new FileReader();
-
-        reader.onload = (event) => {
-            const encodedImage = event.target.result;
-            console.log(encodedImage); // Log the encoded image string
-            const blob = new Blob([encodedImage], { type: image.type });
-            const formData = new FormData();
-            formData.append("image", blob);
-            editCurrentUser(formData)
-                .then((res) => {
-                    setUserDetails({
-                        ...userDetails,
-                        imageUser: encodedImage
-                    });
-                })
-                .catch((err) => console.log(err));
-        };
-
-        reader.readAsDataURL(image);
-    };
-
     return (
         <html className={`theme-${theme} html-page`}>
         <div className="profile__page">
@@ -164,22 +141,22 @@ const Profile = () => {
                         src={userDetails.imageUser}
                         alt="user"
                         className="profile__banner__image-user"
-                        onClick={() => document.getElementById("fileInput").click()}
+                        //onClick={() => document.getElementById("fileInput").click()}
                     />
                 ) : (
                     <img
                         src={noPhoto}
                         alt="user"
                         className="profile__banner__image-user"
-                        onClick={() => document.getElementById("fileInput").click()}
-                        onChange={handleImageChange}
+                        //onClick={() => document.getElementById("fileInput").click()}
+                        //onChange={handleImageChange}
                     />
                 )}
                 <input
                     type="file"
                     id="fileInput"
                     style={{display: "none"}}
-                    onChange={handleImageChange}
+                    //onChange={handleImageChange}
                 />
             </div>
 

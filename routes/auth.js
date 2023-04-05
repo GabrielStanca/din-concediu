@@ -39,6 +39,17 @@ router.post("/register", async (req, res) => {
                 .status(400)
                 .json(errors);
         }
+        //get the image for the profile
+
+        async function getRandomImageUrl() {
+            const response = await fetch("https://api.giphy.com/v1/gifs/random?api_key=KRkjHZdDP08ygV2ZlBeglDtrYFBNPJnZ&tag=&rating=g");
+            const data = await response.json();
+            console.log(response.data)
+            const imageUrl = data.data.images.fixed_width_still.url
+            return imageUrl;
+        }
+
+        const imageUrl = await getRandomImageUrl();
 
         // Create new user
         const newUser = new User({
@@ -48,7 +59,7 @@ router.post("/register", async (req, res) => {
             lastName: req.body.lastName,
             phone: req.body.phone,
             secret: req.body.secret,
-            imageUser: req.body.imageUser || ""
+            imageUser:imageUrl
         });
 
         // Save user to db 
