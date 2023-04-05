@@ -59,7 +59,6 @@ function App() {
 
                                 ) : (
                                     <>
-                                        {console.log(user)}
                                         <Link to="/login"><span>Login</span></Link>
                                         <Link to="/register"><span>Register</span></Link>
                                     </>

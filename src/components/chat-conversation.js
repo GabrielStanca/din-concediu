@@ -5,7 +5,6 @@ const ChatConversation = ({socket, username, room, conversation}) => {
     const [currentMessage,setCurrentMessage] = useState("")
     const [messageList,setMessageList] = useState( conversation)
     const [currentAuthor, setCurrentAuthor] = useState("")
-    console.log(room,"room")
     const sendMessage = async () =>{
         if(currentMessage!==""){
             const messageData = {

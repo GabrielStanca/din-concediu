@@ -67,5 +67,5 @@ io.on("connection",(socket)=>{
 })
 
 server.listen(5000,()=>{
-    console.log("A intrat")
+    console.log("Chat connected")
 })

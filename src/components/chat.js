@@ -58,11 +58,8 @@ const Chat= ()=> {
                                         setShowChat(false)
                                         const self = user._id;
                                         const target = filteredUser._id;
-                                        console.log(self)
-                                        console.log(target)
                                         createChat({targetId: target, initiatorId: self}).then((chat) => {
                                             setRoom(chat.roomId)
-                                            console.log(chat)
                                             joinRoom(chat.roomId)
                                         })
                                     }}

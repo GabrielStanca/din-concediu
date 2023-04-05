@@ -14,7 +14,6 @@ const ForgotPassword= ()=> {
         <div className="forgot-password_container">
             <form onSubmit={(e)=>{
                 e.preventDefault();
-                console.log(forgotPassword)
             }}>
                 <h1>Forgot Password</h1>
                 <div className="forgot-password_input">
