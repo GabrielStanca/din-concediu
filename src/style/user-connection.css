@@ -1,10 +1,11 @@
-.forgot-password_container,.login_container, .register_container {
+.forgot-password_container,.login_container, .register_container, .home_container {
     display: flex;
     justify-content: center;
     height: 100%;
     flex: 1 1 auto;
     align-items: center;
     background-image: linear-gradient( #fab2ff, #1904e5);
+    z-index: 1;
 }
 .forgot-password_container form, .login_container form, .register_container form {
     background: rgba(0,0,0,.5);
@@ -72,8 +73,8 @@
 .login_login-button, .forgot-password_button, .register_save-button {
     width: 70%;
     height: 30px;
-    background: mediumpurple;
-    color: white;
+    background: #fab2ff;
+    color: black;
     border-radius: 5px;
     border: unset;
     transition: all .5s;
@@ -81,7 +82,113 @@
 .login_login-button:hover, .forgot-password_button:hover, .register_save-button:hover {
     width: 75%;
     height: 35px;
-    background: greenyellow;
+    background: #ffa600da;
     color: black;
     border-radius: 10px;
 }
+
+.background-image-login {
+    height: calc(100vh - 50px);
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    
+}
+
+.background-image-register {
+    height: calc(100vh - 50px);
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.background-image-home {
+    height: calc(100vh - 50px);
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+}
+
+.image-center-home {
+    height: 50%;
+    width: 50%;
+    position: absolute;
+    bottom: -25px;
+}
+
+.home_container-title {
+    position: absolute;
+    top: 200px;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.home_container-text {
+    position: absolute;
+    top: 350px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    text-shadow: 1px 1px 2px black;
+    align-items: center;
+}
+
+.home_container-text p {
+    margin: 0 10px;
+    font-size: 20px ;
+}
+
+.home_container-text a {
+    color: white;
+    text-decoration: unset;
+}
+
+.home_container-text span {
+    color:white;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    text-shadow: 1px 1px 2px black;
+    font-style: italic;
+}
+
+.home_container-text span:hover {
+    transition: all .5s;
+    text-shadow:  1px 1px 2px black, 0 0 1em black;
+    transform: scale(1.1);
+
+}
+
+@media screen and (max-width: 768px) {
+    .background-image-login {
+        transform: translateY(200px);
+    }
+    .background-image-register {
+        transform: translateY(200px);
+    }
+
+}
+
+@media screen and (max-width: 1024px) {
+    .register_container form{
+        flex-direction: column;
+    }
+
+    .register_input {
+        height: 30px;
+    }
+}
+
+@media screen and (max-width:600px) {
+    .background-image-register {
+        transform: translateY(280px);
+    }
+}
+

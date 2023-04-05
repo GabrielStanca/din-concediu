@@ -16,6 +16,8 @@ import {useSearchParams} from "react-router-dom";
 import {useGlobalContext} from "../context/GlobalContext";
 import {editCurrentUser} from "../services/editCurrentUser";
 import DeleteAccountModal from "./reusableComponents/modal-delete";
+import "../style/theme.css"
+
 
 const Profile = () => {
     const {user} = useGlobalContext();
@@ -523,11 +525,134 @@ const Profile = () => {
                             )}
                         </div>
                     </TabPanel>
-                </Tabs>
+          <TabPanel>
+            <div className="profile__container__settings">
+              <div className="profile__container__settings__theme">
+                <h1 className="profile__container__about-me__title">Theme:</h1>
+                <div className="settings_themes">
+                  <button
+                    className={`settings_default-theme ${
+                      activeThemeIndex === 0 ? "active" : ""
+                    }`}
+                    onClick={() =>{handleButtonClick(0)
+                      handleThemeButtonClick(0)
+                    }}
+                  ></button>
+                  <p className="profile__settings__theme color-black">Default</p>
+                </div>
+                <div className="settings_themes">
+                  <button
+                    className={`settings_dark-theme ${
+                      activeThemeIndex === 1 ? "active" : ""
+                    }`}
+                    onClick={() =>{
+                      handleButtonClick(1)
+                      handleThemeButtonClick(1)
+                      
+                    }}
+                  ></button>
+                  <p className="profile__settings__theme color-black">Dark Theme</p>
+                </div>
+              </div>
+              {searchParams.get("action") !== "change-password" ? (
+                <div className="settings__change-password__delete-account">
+                  <div className="profile__container__settings__change-password">
+                    <button
+                      className="profile__container__settings__change-password__button"
+                      onClick={() => handleClickChangePassword(searchParams)}
+                    >
+                      Change Password
+                    </button>
+                  </div>
+                  <div className="settings__delete-account">
+                    <button
+                      className="settings__delete-account__button"
+                      onClick={() => {
+                        handleOpenModal();
+                      }}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        className="trash-icon"
+                      ></FontAwesomeIcon>
+                      Delete Account
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <div className="settings__change-password">
+                  <div className="settings__change-password__inputs">
+                    <label htmlFor="oldPassword" className="color-black">Old Password:</label>
+                    <input
+                      id="oldPassword"
+                      className="edit-inputs color-black"
+                      type="password"
+                      onChange={(e) => {
+                        setChangePassword({
+                          ...changePassword,
+                          oldPassword: e.target.value,
+                        });
+                      }}
+                    ></input>
+                    <label htmlFor="newPassword" className="color-black">New Password:</label>
+                    <input
+                      id="newPassword"
+                      className="edit-inputs color-black"
+                      type="password"
+                      onChange={(e) => {
+                        setChangePassword({
+                          ...changePassword,
+                          newPassword: e.target.value,
+                        });
+                      }}
+                    ></input>
+                    <label htmlFor="confirmPassword" className="color-black">Confirm Password:</label>
+                    <input
+                      id="confirmPassword"
+                      className="edit-inputs color-black"
+                      type="password"
+                      onChange={(e) => {
+                        setChangePassword({
+                          ...changePassword,
+                          confirmPassword: e.target.value,
+                        });
+                      }}
+                    ></input>
+                    <div className="profile-edit-buttons">
+                      <button
+                        className="edit-cancel-details-button edit-buttons"
+                        onClick={() => {
+                          setChangePassword({
+                            oldPassword: "",
+                            newPassword: "",
+                            confirmPassword: "",
+                          });
+                          handleClickRemove(searchParams);
+                        }}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="edit-submit-details-button edit-buttons"
+                        onClick={() => {
+                          editCurrentUser(changePassword);
+                          handleClickRemove(searchParams);
+                          setEditSuccess(true);
+                        }}
+                      >
+                        Save
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              )}
             </div>
-        </div>
-        </html>
-    );
+          </TabPanel>
+        </Tabs>
+      </div>
+    </div>
+    </html>
+  );
 };
 
 export default Profile;

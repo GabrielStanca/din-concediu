@@ -1,29 +1,4 @@
-:root {
-  --primary-color: #1904e5;
-  --secondary-color: #fab2ff;
-  --tertiary-color: #ffffff;
-  --quaternary-color: #000000;
-  --quinary-color: #1a04e562;
-  --card-color: rgb(25, 4, 229);
-  --box-shadow-color: rgba(25, 4, 229, 0.9);
-  --icon-color: rgb(94, 86, 86);
 
-}
-
-.theme-dark {
-  --primary-color: #ffffff;
-  --secondary-color: #fab2ff;
-  --tertiary-color:  #000000;
-  --quaternary-color: #ffffff;
-  --quinary-color: #ffffff62;
-  --card-color: #ffffff;
-  --box-shadow-color: rgba(255, 255, 255, 0.9);
-  --icon-color: #ffffff;
-}
-
-.color-black {
-  color: var(--quaternary-color);
-}
 
 .html-page {
   height: 100vh;
@@ -310,7 +285,7 @@
 }
 
 .edit-submit-details-button:hover {
-  background-color: #1a04e559;
+  background-color: var(--hover-color-submit);
 }
 
 .edit-cancel-details-button {
@@ -323,7 +298,7 @@
 }
 
 .edit-cancel-details-button:hover {
-  background-color: #1a04e5be;
+  background-color: var(--hover-color-cancel);
   color: var(--tertiary-color);
 }
 
@@ -536,7 +511,7 @@
 }
 
 .profile__container__settings__change-password__button:hover {
-  background-color: #1904e5c7;
+  background-color: var(--hover-change-password-color);
 }
 
 .settings__change-password__delete-account {
@@ -557,4 +532,33 @@
 .title-icon {
   width:20px;
   height: 20px;
+}
+
+@media (max-width:768px) {
+
+
+  .profile__container__details {
+    display: block;
+    margin-bottom: 20px ;
+  }
+  
+  .profile__container__details__container {
+    margin-bottom: 30px;
+    width:70%;
+    margin-left: 10%;
+  }
+
+  .profile__container__details__edit {
+    width:70%;
+    margin-bottom: 30px;
+    margin-left: 10%;
+  }
+
+  .profile__container__about-me {
+    margin-left: 10%;
+  }
+
+  .profile__container__about-me__edit {
+    margin-left: 10%;
+  }
 }
