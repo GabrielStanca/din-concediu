@@ -75,7 +75,7 @@ display: inline-block;
     display: flex;
     flex-direction: row;
     align-items: center;
-
+    gap: 10px;
     padding: 5px;
     border: 1px solid black;
     border-radius: 20px;
@@ -86,8 +86,9 @@ display: inline-block;
     background: grey;
 }
 .img_user_container {
-    width: 50px;
-    min-width: 50px;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
 }
 .img_user_container .img_user {
     height: 100%;
@@ -134,5 +135,24 @@ display: inline-block;
     position: absolute;
     right: 0;
     top: 0;
+}
+@media (max-width: 768px) {
+    .chat_container {
+        flex-direction: column;
+    }
+    .chat_list {
+        width: unset;
+        max-height: 45%;
+    }
+    .list_constainer {
+        max-height: 75%;
+    }
+    .chat_conversation {
+        width: unset;
+        max-height: 40%;
+    }
+    body,html {
+        overflow: auto;
+    }
 }
 
