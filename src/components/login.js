@@ -4,6 +4,8 @@ import '../App.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faEnvelope, faLock, faX} from '@fortawesome/free-solid-svg-icons'
 import {loginUserService} from "../services/login.service";
+import Background from "../images/background.svg"
+
 
 const Login = () => {
 
@@ -14,6 +16,7 @@ const Login = () => {
 
     return (
         <div className="login_container">
+            <img className="background-image-login" src={Background} alt={"background"}/>
             <form onSubmit={async (e) => {
                 e.preventDefault()
                 try {

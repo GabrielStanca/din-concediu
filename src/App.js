@@ -1,35 +1,35 @@
-import React, {useEffect, useState} from "react";
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
 import Login from "./components/login";
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Home from "./components/home";
 import About from "./components/about";
 import Register from "./components/register";
 import ForgotPassword from "./components/forgot-password";
 import Profile from "./components/profile";
-import {GlobalProvider, useGlobalContext} from "./context/GlobalContext";
-import TB_transparent from "../src/images/TB_transparent.svg"
+import { GlobalProvider, useGlobalContext } from "./context/GlobalContext";
+import TB_transparent from "../src/images/TB_transparent.svg";
 import Chat from "./components/chat";
-import {faBars, faLock, faCircleDot, faRightFromBracket} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {getCurrentUser} from "./services/getCurrentUser"
+import {
+  faBars,
+  faLock,
+  faCircleDot,
+  faRightFromBracket,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { getCurrentUser } from "./services/getCurrentUser";
 
 function App() {
-    const [showNavigationMobile, setShowNavigationMobile] = useState(false)
-    const [user, setUser] = useState(null);
+  const [showNavigationMobile, setShowNavigationMobile] = useState(false);
+  const [user, setUser] = useState(null);
 
-    useEffect(() => {
-        async function fetchData() {
-            const userData = await getCurrentUser();
-            setUser(userData);
-        }
-        fetchData();
-    }, []);
-
-    async function handleDisconnect() {
-        await getCurrentUser(true);
-        setUser(null);
+  useEffect(() => {
+    async function fetchData() {
+      const userData = await getCurrentUser();
+      setUser(userData);
     }
+    fetchData();
+  }, []);
 
     return (
         <GlobalProvider>
@@ -90,7 +90,6 @@ function App() {
                         <Route path="/chat" exact element={<Chat/>}/>
                     </Routes>
                 </Router>
-
             </div>
         </GlobalProvider>
     );
