@@ -20,8 +20,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCurrentUser } from "./services/getCurrentUser";
 
 function App() {
-  const [showNavigationMobile, setShowNavigationMobile] = useState(false);
   const [user, setUser] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -31,68 +31,76 @@ function App() {
     fetchData();
   }, []);
 
-    return (
-        <GlobalProvider>
-            <div className="App">
-                <Router>
-                    <nav>
-                        <div className="navigation_logo">
-                            <img src={TB_transparent} alt="logo"/>
-                        </div>
-                        <button className="navigation_links_mobile"
-                                onClick={() => {
-                                    if (showNavigationMobile)
-                                        setShowNavigationMobile(false)
-                                    else setShowNavigationMobile(true)
-                                }}>
-                            <FontAwesomeIcon icon={faBars}/>
-                        </button>
-                        <div className="navigation_links">
-                            <Link to="/"><span>Home</span></Link>
-                            {
-                                user ? (
-                                    <>
-                                        <Link to="/chat"><span>Chat</span></Link>
-                                        <Link to="/profile"><span>Profile</span></Link>
-                                        <Link to = "/login"><button style={{background:"transparent", border: 0}} onClick={handleDisconnect}><FontAwesomeIcon style={{cursor:"pointer"}} icon={faRightFromBracket} /></button></Link>
-                                    </>
+  const handleToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
 
-                                ) : (
-                                    <>
-                                        <Link to="/login"><span>Login</span></Link>
-                                        <Link to="/register"><span>Register</span></Link>
-                                    </>
-                                )
-                            }
-                        </div>
-
-                    </nav>
-                    <div className={`navigation_container_mobile ${showNavigationMobile ? "active_menu" : ""}`}>
-                        <Link to="/"><span>Home</span></Link>
-                        {!user ? (
-                            <>
-                                <Link to="/login"><span>Login</span></Link>
-                                <Link to="/register"><span>Register</span></Link>
-                            </>
-                        ) : (
-                            <Link to="/profile"><span>Profile</span></Link>
-                        )}
-
-
-                    </div>
-                    <Routes>
-                        <Route path="" exact element={<Home/>}/>
-                        <Route path="/login" exact element={<Login/>}/>
-                        <Route path="/about" exact element={<About/>}/>
-                        <Route path="/register" exact element={<Register/>}/>
-                        <Route path="/forgot-password" exact element={<ForgotPassword/>}/>
-                        <Route path="/profile" exact element={<Profile/>}/>
-                        <Route path="/chat" exact element={<Chat/>}/>
-                    </Routes>
-                </Router>
+  return (
+    <GlobalProvider>
+      <div className={`App ${isNavOpen ? "nav-open" : ""}`}>
+        <Router>
+          <nav className="navbar">
+            <div className="navigation_logo">
+              <img src={TB_transparent} alt="logo" />
             </div>
-        </GlobalProvider>
-    );
+            <div
+              className={`navbar__toggle ${isNavOpen ? "active" : ""}`}
+              onClick={handleToggle}
+            >
+              <div className="navbar__toggle-icon">
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+            </div>
+            <div className={`navigation_links ${isNavOpen ? "active" : ""}`}>
+              <Link to="/">
+                <span>Home</span>
+              </Link>
+              {user ? (
+                <>
+                  <Link to="/chat">
+                    <span>Chat</span>
+                  </Link>
+                  <Link to="/profile">
+                    <span>Profile</span>
+                  </Link>
+                  <Link to="/login">
+                    <button
+                      style={{ background: "transparent", border: 0 }}
+                      onClick={handleDisconnect}
+                    >
+                      <FontAwesomeIcon
+                      className="disconnect"
+                        style={{ cursor: "pointer" }}
+                        icon={faRightFromBracket}
+                      />
+                    </button>
+                  </Link>
+                </>
+              ) : (
+                <>
+                  <Link to="/login">
+                    <span>Login</span>
+                  </Link>
+                  <Link to="/register">
+                    <span>Register</span>
+                  </Link>
+                </>
+              )}
+            </div>
+          </nav>
+          <Routes>
+            <Route path="" exact element={<Home />} />
+            <Route path="/login" exact element={<Login />} />
+            <Route path="/about" exact element={<About />} />
+            <Route path="/register" exact element={<Register />} />
+            <Route path="/forgot-password" exact element={<ForgotPassword />} />
+            <Route path="/profile" exact element={<Profile />} />
+            <Route path="/chat" exact element={<Chat />} />
+          </Routes>
+        </Router>
+      </div>
+    </GlobalProvider>
+  );
 }
 
 export default App;

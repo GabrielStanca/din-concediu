@@ -73,8 +73,8 @@
 .login_login-button, .forgot-password_button, .register_save-button {
     width: 70%;
     height: 30px;
-    background: mediumpurple;
-    color: white;
+    background: #fab2ff;
+    color: black;
     border-radius: 5px;
     border: unset;
     transition: all .5s;
@@ -82,13 +82,13 @@
 .login_login-button:hover, .forgot-password_button:hover, .register_save-button:hover {
     width: 75%;
     height: 35px;
-    background: greenyellow;
+    background: #ffa600da;
     color: black;
     border-radius: 10px;
 }
 
 .background-image-login {
-    height: 100%;
+    height: calc(100vh - 50px);
     width: 100%;
     position: absolute;
     z-index: -1;
@@ -96,14 +96,14 @@
 }
 
 .background-image-register {
-    height: 100%;
+    height: calc(100vh - 50px);
     width: 100%;
     position: absolute;
     z-index: -1;
 }
 
 .background-image-home {
-    height: 100%;
+    height: calc(100vh - 50px);
     width: 100%;
     position: absolute;
     z-index: -1;
@@ -113,7 +113,57 @@
     height: 50%;
     width: 50%;
     position: absolute;
-    transform: translateY(30%);
+    bottom: -25px;
+}
+
+.home_container-title {
+    position: absolute;
+    top: 200px;
+    text-shadow: 1px 1px 2px black, 0 0 1em black;
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+}
+
+.home_container-text {
+    position: absolute;
+    top: 350px;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin: 0 auto;
+    text-shadow: 1px 1px 2px black;
+    align-items: center;
+}
+
+.home_container-text p {
+    margin: 0 10px;
+    font-size: 20px ;
+}
+
+.home_container-text a {
+    color: white;
+    text-decoration: unset;
+}
+
+.home_container-text span {
+    color:white;
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    width: 100%;
+    text-shadow: 1px 1px 2px black;
+    font-style: italic;
+}
+
+.home_container-text span:hover {
+    transition: all .5s;
+    text-shadow:  1px 1px 2px black, 0 0 1em black;
+    transform: scale(1.1);
+
 }
 
 @media screen and (max-width: 768px) {
