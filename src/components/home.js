@@ -7,7 +7,7 @@ const HomePage= ()=> {
     return (
         <div className="home_container" >
             <img src={Background} className="background" alt={"background"}/>
-            <h1>Welcome to Home page</h1>
+            <h1>Welcome to TeamBuilding</h1>
             <img src={TB_transparent} alt={"asdf"}/>
         </div>
     );
