@@ -31,6 +31,11 @@ function App() {
     fetchData();
   }, []);
 
+  async function handleDisconnect() {
+    await getCurrentUser(true);
+    setUser(null);
+  }
+
   const handleToggle = () => {
     setIsNavOpen(!isNavOpen);
   };
