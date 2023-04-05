@@ -20,8 +20,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { getCurrentUser } from "./services/getCurrentUser";
 
 function App() {
-  const [showNavigationMobile, setShowNavigationMobile] = useState(false);
   const [user, setUser] = useState(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   useEffect(() => {
     async function fetchData() {
@@ -36,24 +36,27 @@ function App() {
     setUser(null);
   }
 
+  const handleToggle = () => {
+    setIsNavOpen(!isNavOpen);
+  };
+
   return (
     <GlobalProvider>
-      <div className="App">
+      <div className={`App ${isNavOpen ? "nav-open" : ""}`}>
         <Router>
-          <nav>
+          <nav className="navbar">
             <div className="navigation_logo">
               <img src={TB_transparent} alt="logo" />
             </div>
-            <button
-              className="navigation_links_mobile"
-              onClick={() => {
-                if (showNavigationMobile) setShowNavigationMobile(false);
-                else setShowNavigationMobile(true);
-              }}
+            <div
+              className={`navbar__toggle ${isNavOpen ? "active" : ""}`}
+              onClick={handleToggle}
             >
-              <FontAwesomeIcon icon={faBars} />
-            </button>
-            <div className="navigation_links">
+              <div className="navbar__toggle-icon">
+                <FontAwesomeIcon icon={faBars} />
+              </div>
+            </div>
+            <div className={`navigation_links ${isNavOpen ? "active" : ""}`}>
               <Link to="/">
                 <span>Home</span>
               </Link>
@@ -71,6 +74,7 @@ function App() {
                       onClick={handleDisconnect}
                     >
                       <FontAwesomeIcon
+                      className="disconnect"
                         style={{ cursor: "pointer" }}
                         icon={faRightFromBracket}
                       />
@@ -79,7 +83,6 @@ function App() {
                 </>
               ) : (
                 <>
-                  {console.log(user)}
                   <Link to="/login">
                     <span>Login</span>
                   </Link>
@@ -90,29 +93,6 @@ function App() {
               )}
             </div>
           </nav>
-          <div
-            className={`navigation_container_mobile ${
-              showNavigationMobile ? "active_menu" : ""
-            }`}
-          >
-            <Link to="/">
-              <span>Home</span>
-            </Link>
-            {!user ? (
-              <>
-                <Link to="/login">
-                  <span>Login</span>
-                </Link>
-                <Link to="/register">
-                  <span>Register</span>
-                </Link>
-              </>
-            ) : (
-              <Link to="/profile">
-                <span>Profile</span>
-              </Link>
-            )}
-          </div>
           <Routes>
             <Route path="" exact element={<Home />} />
             <Route path="/login" exact element={<Login />} />
